@@ -27,8 +27,9 @@ public class XySafeShulkerBoxPlugin {
 	public static final Logger LOGGER = LoggerFactory.getLogger("XySafeShulkerBox");
 	
     public XySafeShulkerBoxPlugin() {
-    	if (instance != null)
+    	if (instance != null) {
 			throw new IllegalStateException();
+		}
 		instance = this;
 	}
 
@@ -43,8 +44,9 @@ public class XySafeShulkerBoxPlugin {
     }
     
 	public static XySafeShulkerBoxPlugin get() {
-		if (instance == null)
+		if (instance == null) {
 			throw new IllegalStateException("Instance not available");
+		}
 		return instance;
 	}
 }

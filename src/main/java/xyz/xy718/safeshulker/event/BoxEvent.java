@@ -61,11 +61,15 @@ public class BoxEvent {
 			) {
 		event.getTargetBlock().getLocation().ifPresent( location ->{
 			location.getTileEntity().ifPresent( te ->{
+				//判断是否是原生sb
 				if(te.getType().equals(TileEntityTypes.SHULKER_BOX)) {
+					//是原生的sb，那么保存了吗？
 					if(openedShulker.containsKey(((ShulkerBox)te).hashCode())) {
 						player.sendMessage(Text.of("其他人在使用"));
 						event.setCancelled(true);
 					}
+				}else if(te instanceof TileEntityIronShulkerBox){
+					//哦吼，是更多箱子的sb哦
 				}
 			} );
 		});
@@ -74,6 +78,7 @@ public class BoxEvent {
 	
 	ShulkerBox getShunkerOrNull(Event event){
 		ShulkerBox retS=null;
+		//死亡姨夫
 		if(event.getContext().get(EventContextKeys.BLOCK_HIT).isPresent()) {
 			if(event.getContext().get(EventContextKeys.BLOCK_HIT).get().getLocation().isPresent()) {
 				if(event.getContext().get(EventContextKeys.BLOCK_HIT).get().getLocation().get().getTileEntity().isPresent()) {
